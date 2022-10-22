@@ -12,12 +12,13 @@ if ($conn->connect_error) {
      die("Connection to database failed: " . $conn->connect_error);
 }
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+
   $fname  = $_POST['first_name'];
   $lname  = $_POST['last_name'];
   $email  = $_POST['email'];
   $password  = $_POST['password'];
  
-  /* validate whether user has entered all values. */
     if(!$fname || !$lname || !$email || !$password){
        $result = 2;
     } elseif (!strpos($email, "@") || !strpos($email, ".")) {
@@ -27,8 +28,22 @@ if ($conn->connect_error) {
       $stmt   = $conn->prepare($sql);
       $stmt->bind_param('ssss', $fname, $lname, $email, $password);
       $result = $stmt->execute(); 
-   }
-   echo $result;
+    }
+    echo $result;
+
+  }else{
+    $email  = $_GET['email'];
+
+    $sql = "select  * from registration where email = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('s', $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->num_rows;
+
+    echo  $row;
+
+ }
 
   $conn->close(); 
 ?>
