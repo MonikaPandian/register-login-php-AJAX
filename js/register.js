@@ -11,6 +11,7 @@ function register(){
             signup(formData).then(function(result){
                 if(result == 1){
                     alert("successfully registered");
+                    window.location.replace("./login.html");
                 }else if(result == 2){
                     alert("Enter all fields: first name, lastname, email and password");
                 }else if(result == 3){
@@ -32,7 +33,7 @@ function checkExisting(formData){
     var deferred = $.Deferred();
     $.ajax({
     type: "GET",
-    url: "http://localhost/Internship/php/login.php",
+    url: "http://localhost/Internship/php/register.php",
     data : formData,
     async: false,
     success:function(response){ 
