@@ -20,9 +20,14 @@ $stmt = $conn->prepare($sql);
 $stmt->bind_param('ss', $email, $password);
 $stmt->execute();
 $result = $stmt->get_result();
-$row = $result->num_rows;
-
-echo  $row;
+$rowcount = $result->num_rows;
+if($rowcount != 0){
+     //echo implode(",",  $result -> fetch_all()[0]);
+     $row = $result -> fetch_assoc();
+     echo "email=".$row["email"]."&firstname=".$row['firstname']."&lastname=".$row['lastname'];
+}else{
+     echo $rowcount;
+}
 
 $conn->close();
  

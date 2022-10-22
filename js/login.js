@@ -4,11 +4,11 @@ function login(){
     var formData = { email: email, password: password };
 
     loginCheck(formData).then(function(response){
-        if(response == 1){
-            alert("Login successful");
-            window.location.replace("./profile.html");
-        }else{
+        if(response == 0){
             alert("Enter a valid Email and Password");
+        }else{
+            alert("Login successful");
+            window.location.replace("./profile.html?"+response);
         }
     });
 

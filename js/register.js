@@ -56,5 +56,3 @@ function signup(formData){
     });
     return deferred.promise();
 }
-
-
