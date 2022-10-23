@@ -42,7 +42,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $row = $result->num_rows;
 
     echo  $row;
-
  }
 
   $conn->close(); 
